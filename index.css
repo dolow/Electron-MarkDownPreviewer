@@ -1,0 +1,27 @@
+body {
+    background-color: #fcfcfc;
+}
+
+body pre {
+    background-color: #eaeaea;
+    padding: 8px;
+}
+
+.clear {
+    clear: both;
+}
+
+#md-src {
+    width: 45%;
+    height: 100%;
+    float: left;
+}
+
+#md-preview {
+    width: 45%;
+    float: left;
+    margin-left: 5%;
+    padding: 8px;
+    border: 1px solid #dddddd;
+}
+

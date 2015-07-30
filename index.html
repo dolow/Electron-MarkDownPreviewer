@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>md previewer</title>
+    <script src="lib/sandbox.js"></script>
+    <script>
+        // load modules
+        var preview = new MDPreview();
+        var $       = preview.module('jquery');
+        var Marked  = preview.module('marked');
+
+        Marked.setOptions({
+            renderer    : new Marked.Renderer(),
+            gfm         : true,
+            tables      : true,
+            breaks      : false,
+            pedantic    : false,
+            sanitize    : true,
+            smartLists  : true,
+            smartypants : false
+        });
+    </script>
+    <script>
+        /**
+         * process only html-related things here.
+         */
+        $(function(){
+            // match window size
+            function refreshHeight()
+            {
+                var h = $(window).height() * 0.8;
+                $('#md-src').css('height', h);
+                $('#md-preview').css('height', h);
+            }
+            
+            $(window).ready(refreshHeight);
+            $(window).resize(refreshHeight);
+            
+            // event handlers
+            $('#md-src').bind("keyup", function(){
+                $('#md-preview').html(Marked($('textarea#md-src').val()));
+            });
+            
+            $('#btn-save').bind("click", function(){
+                preview.saveContent($('textarea#md-src').val());
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+    <textarea id="md-src" type="textfield"></textarea>
+    <div id="md-preview"></div>
+    <br class="clear" />
+    <input id="btn-save" type="button" value="save" />
+</body>
+</html>
